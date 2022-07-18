@@ -23,12 +23,13 @@ function* fetchAuthLoginMid(action) {
 }
 
 function* fetchAuthRegisterMid(action) {
-  console.log('regiter saga', action.payload);
   const { email, password } = action.payload;
   try {
     const response = yield call(registerUserRequest, { email, password });
-    if (response) {
+    if (response.data) {
       yield put(authRegisterRequestSuccess());
+    } else {
+      yield put(actions.authRegisterError(response));
     }
   } catch (error) {
     console.log('error register', error);

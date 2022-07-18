@@ -1,10 +1,11 @@
-import React from "react";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
-import routes from "./routes";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import routes from './routes';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         {routes.map((route, i) => {
           return (
@@ -17,7 +18,19 @@ function App() {
           );
         })}
       </Routes>
-    </BrowserRouter>
+      <div>
+        <ToastContainer
+          position='top-right'
+          // autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+        />
+      </div>
+    </>
   );
 }
 

@@ -9,16 +9,14 @@ import TextLineThrough from 'components/TextLineThrough';
 import useLogin from '../services/useLogin';
 
 const Login = () => {
-  const { loading, handleSubmit, handleChange } = useLogin();
-  const handleClick = () => {};
-
+  const { loading, formik } = useLogin();
   return (
     <div className='login'>
       <div className='login__logo'>
         <h2>DOAN MOVIE</h2>
       </div>
       <div className='login__body'>
-        <form className='form-signin' onSubmit={handleSubmit}>
+        <form className='form-signin' onSubmit={formik.handleSubmit}>
           <Typography
             variant='h3'
             fontWeight='bold'
@@ -36,22 +34,30 @@ const Login = () => {
             name='email'
             label='Email'
             type='text'
-            onChange={(e) => handleChange(e.target.name, e.target.value)}
-            error=''
+            onChange={formik.handleChange}
+            error={
+              formik.errors.email && formik.touched.email
+                ? formik.errors.email
+                : ''
+            }
           />
           <FormGroup
             id='password'
             name='password'
             label='Password'
             type='password'
-            onChange={(e) => handleChange(e.target.name, e.target.value)}
+            error={
+              formik.errors.password && formik.touched.password
+                ? formik.errors.password
+                : ''
+            }
+            onChange={formik.handleChange}
           />
 
           <BaseButton
             width='50%'
             height='50px'
             color='primary'
-            onClick={handleClick}
             custom={{
               marginTop: '20px',
             }}

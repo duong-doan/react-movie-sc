@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import authReducer from 'modules/auth/store/slice';
 import rootSaga from './saga';
+import { throwMiddleware } from './middleware';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -12,7 +13,8 @@ export const store = configureStore({
   devTools: false,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ thunk: false, serializableCheck: false }).concat(
-      sagaMiddleware
+      sagaMiddleware,
+      throwMiddleware
     ),
 });
 

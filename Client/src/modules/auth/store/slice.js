@@ -32,7 +32,8 @@ export const authSlice = createSlice({
     [actions.authLoginRequest.type]: (state) => {
       state.loading = true;
     },
-    [actions.authRegisterError.type]: (state) => {
+    [actions.authRegisterError.type]: (state, action) => {
+      console.log('extra', action);
       state.loading = false;
     },
   },

@@ -3,7 +3,7 @@ import Body from './containers/Body';
 
 const homeRoutes = [
   {
-    path: '/home',
+    path: '/',
     auth: true,
     exact: true,
     component: <Body />,

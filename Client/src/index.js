@@ -1,15 +1,20 @@
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  fab,
+  faFontAwesome,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import './assets/main.scss';
 import App from './routes';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faTwitter, faFontAwesome } from '@fortawesome/free-brands-svg-icons';
-import { ThemeProvider } from '@mui/material/styles';
-import customTheme from './theme/index';
 import { store } from './store/index';
-import { Provider } from 'react-redux';
+import customTheme from './theme/index';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -21,11 +26,13 @@ library.add(fas, fab, faTwitter, faFontAwesome);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={customTheme}>
-        <App />
-      </ThemeProvider>
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={customTheme}>
+          <App />
+        </ThemeProvider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -7,6 +7,7 @@ const authController = {
     try {
       const { email, password } = req.body;
       const user = await Users.findOne({ email });
+      console.log('user', user);
       if (user) {
         return res.send(400).json({ message: 'email is already exist' });
       }
@@ -17,7 +18,7 @@ const authController = {
       await newUser.save();
       res.json({ message: 'Register user successfull' });
     } catch (error) {
-      return res.send(500).json({ message: error });
+      res.send(500).json({ message: error });
     }
   },
   login: async (req, res) => {

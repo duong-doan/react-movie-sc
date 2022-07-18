@@ -9,7 +9,7 @@ import ImageDocument2 from 'assets/images/slider_top/h1-blog-image-2.jpeg';
 import ImageDocument3 from 'assets/images/slider_top/h1-blog-image-3.jpeg';
 
 export const HOME_ROUTES = {
-  HOME: '/home',
+  HOME: '/',
 };
 
 export const DATA_SECTION_COMMENTS = [
