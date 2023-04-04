@@ -43,7 +43,6 @@ export const movieSlice = createSlice({
       state.comments = action.payload;
     },
     getMovieSearchSuccess: (state, action) => {
-      console.log('reducer', action.payload);
       state.moviesSearch = action.payload;
       state.loadingSearch = false;
     },

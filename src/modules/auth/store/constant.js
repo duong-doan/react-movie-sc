@@ -13,3 +13,8 @@ export const AUTH_REGISTER_ERROR = 'AUTH_REGISTER_ERROR';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const SIGNUP_FAILED = 'SIGNUP_FAILED';
 export const SIGNIN_FAILED = 'SIGNIN_FAILED';
+
+export const CHANNEL = {
+  CREATE_ROOM: "create-room",
+  MESSAGE: 'message'
+}

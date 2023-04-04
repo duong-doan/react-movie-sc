@@ -30,7 +30,7 @@ const HandleError = (action) => {
         toast.error('Unauthenticated');
         break;
       case FORBIDDEN:
-        store.dispath(logoutRequest());
+        store.dispatch(logoutRequest());
         toast.error(message);
         break;
       default:

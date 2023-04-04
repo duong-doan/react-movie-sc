@@ -1,27 +1,33 @@
-import TextLineThrough from 'components/TextLineThrough/index';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
-import { selectIsAuthenticated, selectUser } from 'modules/auth/store/selector';
+import {
+  selectIsAuthenticated,
+  selectOpenInfoUserTab,
+  selectUser,
+} from 'modules/auth/store/selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutRequest } from 'modules/auth/store/actions';
+import { Box } from '@mui/material';
+import TextLineThrough from 'components/TextLineThrough/index';
+import Contact from 'modules/chatting/components/Contact/index';
+import BaseIconBox from 'components/BaseIconBox/index';
+import { selectIsActiveAddRoom } from 'modules/chatting/store/selector';
+import CreateRoomChat from 'modules/chatting/components/CreateRoomChat/index';
+import { setOpenInfoUserTab } from 'modules/auth/store/slice';
 
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const isAuthenticated = useSelector(selectIsAuthenticated);
-  const [open, setOpen] = useState(false);
+  const isActiveAddRoom = useSelector(selectIsActiveAddRoom);
+  const openInfoUserTab = useSelector(selectOpenInfoUserTab);
 
   const handleClickExpand = () => {
-    setOpen((prevState) => !prevState);
+    dispatch(setOpenInfoUserTab(true));
   };
 
   const handleClickClose = () => {
-    setOpen(false);
-  };
-
-  const handleClickLogout = () => {
-    dispatch(logoutRequest());
+    dispatch(setOpenInfoUserTab(false));
   };
 
   return (
@@ -57,22 +63,47 @@ function Header() {
         <div></div>
       </div>
 
-      <div className={`header__expand ${open ? 'open' : ''}`}>
-        <CloseIcon onClick={handleClickClose} />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+        className={`header__expand ${openInfoUserTab ? 'open' : ''}`}
+      >
+        <BaseIconBox
+          onClick={handleClickClose}
+          customStyle={{
+            width: '40px',
+            height: '40px',
+            position: 'absolute',
+            top: '5px',
+            right: '5px',
+          }}
+        >
+          <CloseIcon
+            sx={{
+              width: 'inherit',
+              height: 'inherit',
+              color: '#888',
+            }}
+          />
+        </BaseIconBox>
         {isAuthenticated ? (
-          <div className='user-profile'>
-            <h4>{user.email}</h4>
-            <h6 onClick={handleClickLogout} style={{ cursor: 'pointer' }}>
-              Logout
-            </h6>
-          </div>
+          <Box className='user-profile' sx={{}}>
+            <Box sx={{ marginBottom: '80px' }}>
+              <h6 style={{ cursor: 'pointer' }}>Welcome</h6>
+              <h4>{user.email}</h4>
+            </Box>
+
+            {isActiveAddRoom ? <CreateRoomChat /> : <Contact />}
+          </Box>
         ) : (
           <div className='introduce'>
             <h4>DOAN MOVIE</h4>
             <h6>A MODERN THEME FOR THE FILM INDUSTRY & VIDEO PRODUCTION</h6>
           </div>
         )}
-      </div>
+      </Box>
     </div>
   );
 }

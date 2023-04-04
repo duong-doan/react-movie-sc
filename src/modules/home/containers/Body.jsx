@@ -10,6 +10,7 @@ import SectionDocuments from '../components/SectionDocuments';
 import SectionBrands from '../components/SectionBrands';
 import Header from './Header';
 import Footer from './Footer';
+import ChattingZone from 'modules/chatting/components/ChattingZone/index';
 
 const Homepage = () => {
   return (
@@ -25,6 +26,7 @@ const Homepage = () => {
       </SectionComment>
       <SectionBrands />
       <Footer />
+      <ChattingZone />
     </div>
   );
 };

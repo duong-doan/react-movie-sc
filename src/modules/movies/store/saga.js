@@ -15,6 +15,7 @@ import {
   getCommentSuccess,
   getMovieSearchSuccess,
   getMovieSearchFailed,
+  updateLoadingSearch,
 } from './slice';
 
 function* fetchListMovieRequestMid(action) {
@@ -79,6 +80,7 @@ function* postCommentRequestMid(action) {
 function* searchMoviesRequestMid(action) {
   const searchValue = action.payload;
   try {
+    yield put(updateLoadingSearch(true));
     const response = yield call(searchMoviesApi, searchValue);
     yield put(getMovieSearchSuccess(response.data.movies));
   } catch (error) {
